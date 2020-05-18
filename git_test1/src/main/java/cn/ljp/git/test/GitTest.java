@@ -14,6 +14,7 @@ public class GitTest {
 
 
     /**
+     * 我是冲突方
      * 添加注释
      */
     public void test() {
