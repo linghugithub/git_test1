@@ -1,0 +1,55 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+
+    <!-- 配置spring的监听器，在servletContext启动的时候，初始化ioc容器-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!-- 设置文件的路径。监听器启动的时候加载spring的配置文件（默认的话是WEB-INF下）-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+
+
+  <!-- 前端控制器-->
+  <servlet>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+    <init-param><!-- servlet启动自动先解析xml文件-->
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:springMvc.xml</param-value>
+    </init-param>
+    <!-- 如果值为正整数或者0时，表示容器在应用启动时就加载并初始化这个servlet，值越小，servlet的优先级越高，就越先被加载。-->
+    <load-on-startup>1</load-on-startup> <!-- web容器启动的话，这个servlet就会被加载-->
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <url-pattern>*.do</url-pattern>   <!-- 匹配结尾以*.do 紧急转移：/可以使用，/*不能使用-->
+  </servlet-mapping>
+
+
+  <!-- 解决中文乱码的过滤器-->
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>  <!-- 紧急转移：/*可以使用，/不能使用-->
+  </filter-mapping>
+</web-app>

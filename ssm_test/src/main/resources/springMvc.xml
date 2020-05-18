@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- ioc容器开启扫描-->
+    <!-- 没有准确在到controller这一级的话，产生事务无法正常运转-->
+    <!--<context:component-scan base-package="cn.ljp.ssm">-->
+    <context:component-scan base-package="cn.ljp.ssm.web.controller">
+        <!-- 只扫描 controller注解-->
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:include-filter>
+    </context:component-scan>
+
+
+
+    <!-- 视图解析器：进行视图跳转的 收到字符串，根据字符串进行调换-->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/pages/"></property>  <!-- 告诉mvc请解析的路径在哪 prefix：前缀-->
+        <property name="suffix" value=".jsp"></property>    <!-- 告诉mvc解析文件的类型是什么 suffix：后缀-->
+    </bean>
+
+    <!-- mvc框架开启注解 转换器组件服务开启-->
+    <mvc:annotation-driven/>
+
+    <!-- 前端控制器 这些资源不被拦截拦截，如果不写的话，无法响应js/jquery-min.js效果-->
+   <!-- <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
+    <mvc:resources mapping="/css/**" location="/css/"></mvc:resources>
+    <mvc:resources mapping="/images/**" location="/images/"></mvc:resources>-->
+    <mvc:default-servlet-handler/>  <!-- 解除对静态资源的访问限制-->
+</beans>
