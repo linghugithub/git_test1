@@ -13,6 +13,9 @@ public class GitTest {
     }
 
 
+    /**
+     * 添加注释
+     */
     public void test() {
 
         System.out.println("hello ");
