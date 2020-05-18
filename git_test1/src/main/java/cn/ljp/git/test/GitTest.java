@@ -16,6 +16,9 @@ public class GitTest {
     public void test() {
 
         System.out.println("hello ");
+    }
 
+    public void test1() {
+        System.out.println("hello1");
     }
-    }
+}
