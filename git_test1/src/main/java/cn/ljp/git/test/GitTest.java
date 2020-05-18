@@ -14,6 +14,8 @@ public class GitTest {
 
 
     /**
+     *
+     * 思路：将搭配好的ssm环境上传到github上
      * 添加注释
      */
     public void test() {
