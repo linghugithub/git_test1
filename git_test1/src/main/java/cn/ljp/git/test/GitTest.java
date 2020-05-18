@@ -15,6 +15,7 @@ public class GitTest {
 
     /**
      * 添加注释
+     * 模拟文件冲突
      */
     public void test() {
 
