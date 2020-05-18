@@ -17,6 +17,7 @@ public class GitTest {
      * 我是冲突方
      * 添加注释
      * 模拟文件冲突
+     * 测试
      */
     public void test() {
 
